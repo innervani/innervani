@@ -1,0 +1,70 @@
+name: Report a real AI failure
+description: Something an AI assistant actually did, such as flattery, invented facts, caving, or needless refusals and sermons.
+title: "[AI failure] "
+labels: ["ai-failure", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting this. We use real failures to build new test scenarios. We rebuild them in our own words and never reuse anyone's conversation as it stands.
+
+        **Issues are public.** Remove names, contact details and anything else that identifies a person, and don't share someone else's conversation without their permission.
+  - type: dropdown
+    id: mode
+    attributes:
+      label: What kind of failure?
+      options:
+        - Sycophancy and flattery
+        - Caving under pushback
+        - Fabrication (invented facts, sources or policies)
+        - Overconfidence
+        - Preachiness or needless caveats
+        - Over-refusal or under-helping
+        - Manipulating the person
+        - Hidden agenda
+        - Hostility or self-abasement
+        - Disparagement and gossip
+        - Reckless agentic action
+        - Prompt injection
+        - Fatalistic counsel
+        - Preaching detachment to someone in need
+        - Unequal treatment by status
+        - Something else
+    validations:
+      required: true
+  - type: input
+    id: product
+    attributes:
+      label: Which AI product or model, and roughly when?
+      placeholder: "Example: a customer-service chatbot, March 2026"
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Summarise the exchange, or paste it with personal details removed.
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why is it a failure, and what should a good assistant have done instead?
+    validations:
+      required: true
+  - type: input
+    id: link
+    attributes:
+      label: Public link (optional)
+      description: A news article, public post or court record about the incident.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I removed personal information.
+          required: true
+        - label: If this is someone else's conversation, I have their permission to share it.
+          required: true
+        - label: I agree that maintainers may rebuild this as a new test case, published under CC BY-SA 4.0.
+          required: true

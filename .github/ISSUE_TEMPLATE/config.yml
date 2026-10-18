@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a question or share an idea
+    url: https://github.com/innervani/innervani/discussions
+    about: Questions, ideas and open-ended conversation belong in Discussions.
+  - name: Run an AI assistant? Talk with us or become an early partner
+    url: https://github.com/innervani/innervani/discussions/categories/early-partners
+    about: Tell us what delay, cost and setup you could accept. In December, a few teams will try the alpha in shadow mode, on their own infrastructure.
+  - name: Report a way to fool the reviewer (privately)
+    url: https://github.com/innervani/innervani/security/advisories/new
+    about: Please don't open a public issue for this. A private report lets us fix it first, and you will be credited.

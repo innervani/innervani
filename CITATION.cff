@@ -1,0 +1,33 @@
+# How to cite innerVANI. GitHub shows this as "Cite this repository".
+# Format: https://citation-file-format.github.io
+cff-version: 1.2.0
+message: "If you use innerVANI or its standard in your work, please cite it as below."
+title: "innerVANI: an open conscience layer for AI assistants"
+type: software
+authors:
+  - family-names: Saha
+    given-names: Avish
+    orcid: "https://orcid.org/0009-0001-1124-7119"
+  - name: "The innerVANI contributors"
+abstract: >-
+  innerVANI is an open, model-agnostic conscience layer for AI assistants. It
+  reviews what an AI is about to say or do against a public standard, the
+  Conscience Foundation, and returns PASS, REVISE, ASK or DECLINE, naming the
+  principles behind each verdict. It targets failures of character, such as
+  flattery, invented facts, giving way under pushback, reckless actions, and
+  needless refusals or lectures, and it measures over-correction as carefully
+  as failure.
+keywords:
+  - AI safety
+  - AI ethics
+  - sycophancy
+  - hallucination
+  - over-refusal
+  - LLM evaluation
+  - guardrails
+repository-code: "https://github.com/innervani/innervani"
+url: "https://github.com/innervani/innervani"
+# This field records the license of the code. The standard and the documentation
+# are under CC-BY-4.0 and the public test cases under CC-BY-SA-4.0; REUSE.toml
+# gives the license of every file.
+license: Apache-2.0

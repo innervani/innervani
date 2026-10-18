@@ -1,0 +1,42 @@
+# The license of every file in this repository, in the format of the REUSE
+# specification (https://reuse.software). CI checks it with `reuse lint`.
+# Files with their own license header, such as CODE_OF_CONDUCT.md and the
+# Python scripts, follow their header. The full license texts are in LICENSES/.
+
+version = 1
+
+# The standard and the documentation
+[[annotations]]
+path = [
+    "standard/**",
+    "README.md",
+    "ROADMAP.md",
+    "CONTRIBUTING.md",
+    "CONTRIBUTORS.md",
+    "GOVERNANCE.md",
+    "SECURITY.md",
+    "THIRD_PARTY_LICENSES.md",
+    "CHANGELOG.md",
+    "CITATION.cff",
+]
+SPDX-FileCopyrightText = "2026 innerVANI contributors"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+# The test cases, and the template that new cases start from
+[[annotations]]
+path = ["tests/public/**", "tests/case_template.yaml"]
+SPDX-FileCopyrightText = "2026 innerVANI contributors"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+# Code, tooling and repository settings
+[[annotations]]
+path = [
+    "scripts/**",
+    "tests/schema/**",
+    "tests/*.py",
+    ".github/**",
+    ".gitignore",
+    ".gitattributes",
+]
+SPDX-FileCopyrightText = "2026 innerVANI contributors"
+SPDX-License-Identifier = "Apache-2.0"

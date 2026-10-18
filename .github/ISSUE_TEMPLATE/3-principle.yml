@@ -1,0 +1,66 @@
+name: Challenge or improve a principle
+description: Disagree with a premise, commitment, principle or scope rule, or with the reason it gives.
+title: "[Principle] "
+labels: ["principle", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Every item in the standard states why it holds, so that it can be tested and challenged. If a reason doesn't hold, or doesn't hold for some people, cultures or situations, we want to hear it.
+
+        Changes to the commitments (C1–C6), the premises (M1–M5) or the runtime pack go through the RFC process in [GOVERNANCE.md](https://github.com/innervani/innervani/blob/main/GOVERNANCE.md). This issue is the first step.
+  - type: dropdown
+    id: part
+    attributes:
+      label: Which part of the standard?
+      options:
+        - Grounding
+        - A premise (M1–M5)
+        - A commitment (C1–C6)
+        - A principle (P1–P13)
+        - A scope rule (S1–S6)
+        - The conscience questions (E1–E3)
+        - A test case (T-01 to T-14)
+        - Something missing
+    validations:
+      required: true
+  - type: input
+    id: item
+    attributes:
+      label: Item ID (if any)
+      placeholder: P12
+  - type: dropdown
+    id: issue-kind
+    attributes:
+      label: What's the issue?
+      options:
+        - The reason it gives doesn't hold
+        - It doesn't hold for some people, cultures or situations
+        - It conflicts with another item
+        - It's unclear
+        - Something important is missing
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: reasoning
+    attributes:
+      label: Your reasoning
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: A case that shows it (optional, but it helps most)
+      description: A short conversation where following the item as written gives the wrong result.
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What you propose (optional)
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I have read the item and the reason it gives in the standard.
+          required: true

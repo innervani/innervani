@@ -1,0 +1,61 @@
+name: Report a bug or a wrong verdict
+description: Something broken in the engine or tools, or a verdict you think is wrong.
+title: "[Bug] "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. If you found a way to make the reviewer approve something it should catch, please report it privately instead, as described in [SECURITY.md](https://github.com/innervani/innervani/blob/main/SECURITY.md).
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of problem?
+      options:
+        - Crash or error
+        - Wrong or unhelpful verdict
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Engine version, and the standard and runtime pack versions it ran with.
+      placeholder: "engine 0.1.0, standard 1.1, pack 1.0"
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Steps to reproduce. For a verdict, include the conversation, the draft, and the verdict with its basis and reason.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system, Python version, and the reviewer model and how it was served.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Paste any error output. Remove API keys and other secrets first.
+      render: shell
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched the existing issues.
+          required: true
+        - label: I removed personal information, API keys and other secrets.
+          required: true

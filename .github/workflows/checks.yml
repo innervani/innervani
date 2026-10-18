@@ -1,0 +1,93 @@
+# Automatic checks on every pull request and every change to main.
+# Actions are pinned to full commit SHAs; Dependabot proposes updates weekly.
+name: Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  fingerprint:
+    name: Runtime pack fingerprint
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+      - name: Check that the frozen runtime pack is unchanged
+        run: python scripts/check_fingerprint.py
+
+  test-cases:
+    name: Test cases
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+      - name: Install the checker's dependencies
+        run: python -m pip install "pyyaml==6.0.3" "jsonschema==4.26.0"
+      - name: Check every test case
+        run: python tests/validate_cases.py
+
+  licensing:
+    name: Licensing (REUSE)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+      - name: Install REUSE
+        run: python -m pip install "reuse==6.2.0"
+      - name: Check that every file has a license
+        run: reuse lint
+
+  sign-off:
+    name: Sign-off (DCO)
+    # Dependabot's commits carry no sign-off, so its pull requests are skipped.
+    if: github.event_name == 'pull_request' && github.event.pull_request.user.login != 'dependabot[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Check that every commit is signed off
+        env:
+          BASE_REF: ${{ github.base_ref }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          # The commits this pull request adds to its target branch, except merges.
+          commits=$(git rev-list --no-merges "$HEAD" --not "origin/$BASE_REF")
+          missing=0
+          for sha in $commits; do
+            if ! git log -1 --format=%B "$sha" | grep -q '^Signed-off-by: '; then
+              echo "::error::Commit ${sha:0:7} has no Signed-off-by line. See 'Sign your work' in CONTRIBUTING.md."
+              missing=1
+            fi
+          done
+          if [ "$missing" -eq 0 ]; then
+            echo "Every commit is signed off."
+          fi
+          exit "$missing"
