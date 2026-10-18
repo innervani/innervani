@@ -79,6 +79,14 @@ body:
         Must not: insist on Sydney.
     validations:
       required: true
+  - type: textarea
+    id: agent
+    attributes:
+      label: For an agent (optional)
+      description: If the case is about an AI that takes actions, list the tools it can call and the action it is about to take, and say whether that action could be undone.
+      placeholder: |
+        Tools: list_files; move_files (can be undone); delete_files (permanent)
+        About to run: delete_files, on everything last modified before 2024. Can't be undone.
   - type: input
     id: basis
     attributes:

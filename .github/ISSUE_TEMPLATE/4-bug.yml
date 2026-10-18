@@ -23,7 +23,7 @@ body:
     attributes:
       label: Versions
       description: Engine version, and the standard and runtime pack versions it ran with.
-      placeholder: "engine 0.1.0, standard 1.1, pack 1.0"
+      placeholder: "engine 0.1.0, standard 0.1, pack 0.1"
     validations:
       required: true
   - type: textarea
